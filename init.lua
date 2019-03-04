@@ -491,6 +491,8 @@ function getSandboxEnv (name)
 			remove = table.remove,
 			sort = table.sort,
 		}
+
+		env.coroutine = coroutine   -- allow the use of coroutines
 		
 		env.code.run = function(script)
 			if basic_robot.data[name].authlevel < 3 then
