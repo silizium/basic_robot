@@ -429,6 +429,11 @@ function getSandboxEnv (name)
 	for dir, dir_id in pairs(directions) do
 		env.move[dir]  =  function() return commands.move(name,dir_id) end
 	end
+
+	env.fly = {}; -- changes position of robot
+	for dir, dir_id in pairs(directions) do
+			env.fly[dir]  =  function() return commands.fly(name,dir_id) end
+	end
 	
 	env.dig = {};
 	for dir, dir_id in pairs(directions) do

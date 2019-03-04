@@ -100,26 +100,6 @@ basic_robot.commands.move = function(name,dir)
 	return true
 end
 
-basic_robot.commands.fly = function(name,dir)
-	check_operations(name,2,true)
-	local obj = basic_robot.data[name].obj;
-	local pos = pos_in_dir(obj, dir)
-
-	-- can move through walkable nodes
-	if minetest.registered_nodes[minetest.get_node(pos).name].walkable then return end
-	--[[ Oh yes, levitation: todo - check for players right to fly
-	if minetest.get_node({x=pos.x,y=pos.y-1,z=pos.z}).name == "air" and
-        minetest.get_node({x=pos.x,y=pos.y-2,z=pos.z}).name == "air" then 
-        return false
-	end
-	]]
-
-	obj:moveto(pos, true)
-
-	return true
-end
-
-
 basic_robot.commands.turn = function (name, angle)
 	local obj = basic_robot.data[name].obj;
 	local yaw;
