@@ -1,5 +1,5 @@
 BASIC_ROBOT: lightweight robot mod for multiplayer
-minetest 0.5.1
+minetest 0.4.16+
 (c) 2016 rnd
 (CC0) 2018 silizium (Hanno Behrens)
 
@@ -37,6 +37,13 @@ ADDONS 0.5:
 - (nyi) path finding
 - (nyi) repairing of library read
 - (nyi) repairing of colors in display_text
+
+Changes:
+- 0.5.0 New versioning number starting with 0.5.0 aka get_version() gives
+  "2019/04/03 V0.5.0"
+
+Bug fixes: 
+- 0.5.1 get rid of stupid error message when coroutine ends
 
 and many more to come… now let's code!
 

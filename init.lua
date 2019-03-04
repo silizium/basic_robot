@@ -25,7 +25,7 @@ basic_robot.bad_inventory_blocks = { -- disallow taking from these nodes invento
 
 basic_robot.http_api = minetest.request_http_api(); 
 
-basic_robot.version = "2019/04/03hb";
+basic_robot.version = "2019/04/03 V0.5.1";
 
 basic_robot.gui = {}; local robogui = basic_robot.gui -- gui management
 basic_robot.data = {}; -- stores all robot related data
@@ -993,7 +993,7 @@ minetest.register_entity("basic_robot:robot",{
 			if err and type(err) == "string" then 
 				local i = string.find(err,":");
 				if i then err = string.sub(err,i+1) end
-				if string.sub(err,-5)~="abort" then
+				if string.sub(err,-5)~="abort" and err~="cannot resume dead coroutine" then
 					minetest.chat_send_player(self.owner,"#ROBOT ERROR : " .. err) 
 				end
 				self.running = 0; -- stop execution
