@@ -35,6 +35,8 @@ ADDONS 0.5:
 - (nyi) Bresnham line and circle (arc) as coroutines
 - (nyi) fill 
 - (nyi) path finding
+- (nyi) repairing of library read
+- (nyi) repairing of colors in display_text
 
 and many more to come… now let's code!
 
