@@ -29,15 +29,16 @@ ADDONS 0.5:
   a language. You can do loops with goto and recursive function calls you can
   add strings togehter with other means. ".." isn't nice, but it's still not a
   problem. And I really like repeat..until. The alternative is goto.
+- lift ban on "coroutine" for everyone, they are no harm but strength of Lua,
+  I chose to put it under the "robot" privilege and up.
 - (nyi) more digging costs but just "stone" (not yet implemented)
-- (nyi) lift ban on "coroutine" for everyone, they are no harm but strength of Lua
 - (nyi) turtle routine that draws "turtle-strings", using building material
 - (nyi) Bresnham line and circle (arc) as coroutines
 - (nyi) fill 
 - (nyi) path finding
 - (nyi) repairing of library read
 - (nyi) repairing of colors in display_text
-- (nyi) better graphics
+- (nyi) better graphics for robot (the bot spoils the environment atm)
 
 Changes:
 - 0.5.0 New versioning number starting with 0.5.0 aka get_version() gives
