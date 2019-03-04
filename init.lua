@@ -576,7 +576,8 @@ end
 
 check_code = function(code)
   --"while ", "for ", "do ","goto ",  
-  local bad_code = {"repeat", "until", "_c_", "_G", "while%(", "while{", "pcall","%.%."} --,"\\\"", "%[=*%[","--[["}
+  --local bad_code = {"repeat", "until", "_c_", "_G", "while%(", "while{", "pcall","%.%."} --,"\\\"", "%[=*%[","--[["}
+  local bad_code = {"_c_", "_G", "pcall", } --,"\\\"", "%[=*%[","--[["}
   for _, v in pairs(bad_code) do
     if string.find(code, v) then
       return v .. " is not allowed!";
