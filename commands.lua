@@ -105,14 +105,14 @@ basic_robot.commands.fly = function(name,dir)
 	local obj = basic_robot.data[name].obj;
 	local pos = pos_in_dir(obj, dir)
 
+	local pname=basic_robot.data[name].owner
+	local privs=minetest.get_player_privs(pname)
+	if not privs.fly then 
+		error(pname.." can fly so this robot can't. Please get the 'fly' privilege to use the 'fly' command.")
+		return false
+	end
 	-- can move through walkable nodes
 	if minetest.registered_nodes[minetest.get_node(pos).name].walkable then return end
-	--[[ Oh yes, levitation: todo - check for players right to fly
-	if minetest.get_node({x=pos.x,y=pos.y-1,z=pos.z}).name == "air" and
-        minetest.get_node({x=pos.x,y=pos.y-2,z=pos.z}).name == "air" then 
-        return false
-	end
-	]]
 
 	obj:moveto(pos, true)
 

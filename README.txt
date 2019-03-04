@@ -37,10 +37,12 @@ ADDONS 0.5:
 - (nyi) path finding
 - (nyi) repairing of library read
 - (nyi) repairing of colors in display_text
+- (nyi) better graphics
 
 Changes:
 - 0.5.0 New versioning number starting with 0.5.0 aka get_version() gives
   "2019/04/03 V0.5.0"
+- 0.5.1 drop repeat ban, "fly" privilege implemented, 
 
 Bug fixes: 
 - 0.5.1 get rid of stupid error message when coroutine ends
