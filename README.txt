@@ -42,7 +42,10 @@ ADDONS 0.5:
 Changes:
 - 0.5.0 New versioning number starting with 0.5.0 aka get_version() gives
   "2019/04/03 V0.5.0"
-- 0.5.1 drop repeat ban, "fly" privilege implemented, 
+- 0.5.1 
+	drop repeat ban, 
+	"fly" privilege implemented, 
+	allow 'coroutine' library starting with 'robot' privilege 
 
 Bug fixes: 
 - 0.5.1 get rid of stupid error message when coroutine ends
