@@ -426,13 +426,13 @@ basic_robot.commands.attack = function(name, target) -- attack range 4, damage 5
 	
 end
 
-basic_robot.commands.ignite = function(name, target) -- ignite range 1
+basic_robot.commands.ignite = function(name, dir) -- ignite range 1
 	
 	local energy = 0;
 	check_operations(name,2,true);
 	
 	local obj = basic_robot.data[name].obj;
-	local pos = pos_in_dir(obj, dir)	
+	local pos = pos_in_dir(obj, dir)
 	
 	local luaent = obj:get_luaentity();
 	if minetest.is_protected(pos,luaent.owner) then return false end
