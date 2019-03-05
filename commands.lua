@@ -440,9 +440,9 @@ basic_robot.commands.ignite = function(name, dir) -- ignite range 1
 	local nodename = minetest.get_node(pos).name;
 	if nodename == "air" or nodename=="ignore" then return false end
 
-    local target = minetest.get_node(pos)
-	if target.on_ignite then 
-		target.on_ignite(pos, name)
+    --local target = minetest.get_node(pos)
+	if luaent and luaent.on_ignite then 
+		luaent.on_ignite(pos, name)
 		minetest.sound_play(
 			"fire_flint_and_steel",
 			{pos = sound_pos, gain = 0.5, max_hear_distance = 8}
