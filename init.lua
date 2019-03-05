@@ -483,6 +483,10 @@ function getSandboxEnv (name)
 			
 	if authlevel>=1 then -- robot privs
 	
+		env.ignite = {};
+		for dir, dir_id in pairs(directions) do
+			env.ignite[dir]  =  function() return commands.ignite(name,dir_id) end
+		end
 		
 		env.table = {
 			concat = table.concat,

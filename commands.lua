@@ -426,6 +426,32 @@ basic_robot.commands.attack = function(name, target) -- attack range 4, damage 5
 	
 end
 
+basic_robot.commands.ignite = function(name, target) -- ignite range 1
+	
+	local energy = 0;
+	check_operations(name,2,true);
+	
+	local obj = basic_robot.data[name].obj;
+	local pos = pos_in_dir(obj, dir)	
+	
+	local luaent = obj:get_luaentity();
+	if minetest.is_protected(pos,luaent.owner) then return false end
+	
+	local nodename = minetest.get_node(pos).name;
+	if nodename == "air" or nodename=="ignore" then return false end
+
+    local target = minetest.get_node(pos)
+	if target.on_ignite then 
+		target.on_ignite(pos, name)
+		minetest.sound_play(
+			"fire_flint_and_steel",
+			{pos = sound_pos, gain = 0.5, max_hear_distance = 8}
+		)
+	end
+	return true
+end
+
+
 basic_robot.commands.grab = function(name,target)
 
 	local reach = 4;
