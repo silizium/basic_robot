@@ -442,11 +442,14 @@ basic_robot.commands.ignite = function(name, dir) -- ignite range 1
 
     --local target = minetest.get_node(pos)
 	if luaent and luaent.on_ignite then 
+		minetest.chat_send_player(name, "Igniting... "..nodename)
 		luaent.on_ignite(pos, name)
 		minetest.sound_play(
 			"fire_flint_and_steel",
 			{pos = sound_pos, gain = 0.5, max_hear_distance = 8}
 		)
+	else
+		minetest.chat_send_player(name, "Can't ignite target")
 	end
 	return true
 end
@@ -474,7 +477,6 @@ basic_robot.commands.grab = function(name,target)
 	end
 
 	return true
-
 end
 
 --local minetest_version = minetest.get_version().string;
