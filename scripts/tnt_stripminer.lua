@@ -101,7 +101,7 @@ if n=="air" then
 end
 -- gain safety distance
 for i=1,safety do 
-	cost(2) dig.forward()
+	cost(6) dig.forward()
 	cost(2) fly.forward()
 	dangerscan()
 end
