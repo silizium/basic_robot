@@ -427,30 +427,28 @@ basic_robot.commands.attack = function(name, target) -- attack range 4, damage 5
 end
 
 basic_robot.commands.ignite = function(name, dir) -- ignite range 1
+	--check_operations(name,2,true);
 	
-	local energy = 0;
-	check_operations(name,2,true);
-	
-	local obj = basic_robot.data[name].obj;
-	local pos = pos_in_dir(obj, dir)
-	
+	local obj = basic_robot.data[name].obj
+	local tpos = pos_in_dir(obj, dir) -- position of target block in front
+	-- Check protection security	
 	local luaent = obj:get_luaentity();
-	if minetest.is_protected(pos,luaent.owner) then return false end
+	if minetest.is_protected(tpos,luaent.owner) then return false end
 	
-	local nodename = minetest.get_node(pos).name;
-	if nodename == "air" or nodename=="ignore" then return false end
-
-    --local target = minetest.get_node(pos)
-	if luaent and luaent.on_ignite then 
-		minetest.chat_send_all("Igniting... "..nodename)
-		luaent.on_ignite(pos, name)
-		minetest.sound_play(
-			"fire_flint_and_steel",
-			{pos = sound_pos, gain = 0.5, max_hear_distance = 8}
-		)
-	else
-		minetest.chat_send_all("Can't ignite target")
-	end
+    local node=minetest.get_node(tpos)
+	if node.name == "air" or node.name=="ignore" then return false end
+	local table = minetest.registered_nodes[node.name]
+  
+	if table and not table.on_ignite then 
+		--minetest.chat_send_player(luaent.owner, "Can't ignite target")
+		return false
+	end -- error
+	
+	table.on_ignite(tpos,name.." owned by "..luaent.owner)
+	minetest.sound_play(
+		"fire_flint_and_steel",
+		{pos = sound_pos, gain = 0.5, max_hear_distance = 8}
+	)
 	return true
 end
 

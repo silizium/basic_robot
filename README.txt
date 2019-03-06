@@ -31,6 +31,8 @@ ADDONS 0.5:
   problem. And I really like repeat..until. The alternative is goto.
 - lift ban on "coroutine" for everyone, they are no harm but strength of Lua,
   I chose to put it under the "robot" privilege and up.
+- ignite command to enable TNT strip mining (needs priv robot & tnt & not
+  protected target)
 - (nyi) more digging costs but just "stone" (not yet implemented)
 - (nyi) turtle routine that draws "turtle-strings", using building material
 - (nyi) Bresnham line and circle (arc) as coroutines
@@ -47,6 +49,8 @@ Changes:
 	drop repeat ban, 
 	"fly" privilege implemented, 
 	allow 'coroutine' library starting with 'robot' privilege 
+- 0.5.2
+    ignite command implemented
 
 Bug fixes: 
 - 0.5.1 get rid of stupid error message when coroutine ends
