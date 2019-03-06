@@ -495,6 +495,7 @@ function getSandboxEnv (name)
 			remove = table.remove,
 			sort = table.sort,
 		}
+		env.next = next				-- important function for check if table is empty
 
 		env.coroutine = coroutine   -- allow the use of coroutines
 		

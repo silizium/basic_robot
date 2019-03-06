@@ -50,7 +50,7 @@ Changes:
 	"fly" privilege implemented, 
 	allow 'coroutine' library starting with 'robot' privilege 
 - 0.5.2
-    ignite command implemented
+    ignite command implemented, small bugs removed: tested TNT stripminer
 
 Bug fixes: 
 - 0.5.1 get rid of stupid error message when coroutine ends
