@@ -13,7 +13,7 @@
 -- 2 safety should be enough
 ---------------------------------
 debit=6
-safety=2
+safety=3
 tntloads=10
 ---------------------------------
 
@@ -107,11 +107,10 @@ for i=1,safety do
 end
 -- End Setup
 -- Start digging
-local stop=false
 local boredepth=safety
 for hole=1,tntloads do
 	--borehole
-	for i=1,7 do
+	for i=1,6 do
 		local pos1=self.pos()
 		if read_node.forward() == "air" then
 			cost(2) fly.forward()
@@ -129,15 +128,13 @@ for hole=1,tntloads do
 		local pos2=self.pos()
 		if distance(pos1,pos2)<0.5 then
 			say("run out of controlrange")
-			stop=true
 			goto exit
 		end
    end
    --place TNT
    for i=1,3 do cost(2) fly.backward() end
    if is_ore(3) then
-	   stop=not place.backward("tnt:tnt")
-	   if stop then goto exit end
+	   if not place.backward("tnt:tnt") then goto exit end
 	   say("Hole "..hole..": placing TNT and igniting...")
 	   ignite.backward()
    else
