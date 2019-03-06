@@ -33,6 +33,8 @@ ADDONS 0.5:
   I chose to put it under the "robot" privilege and up.
 - ignite command to enable TNT strip mining (needs priv robot & tnt & not
   protected target)
+- tnt_stripminer.lua script how to: https://www.youtube.com/watch?v=rncyaO1plew
+	(german, but easy to understand without language)
 - (nyi) more digging costs but just "stone" (not yet implemented)
 - (nyi) turtle routine that draws "turtle-strings", using building material
 - (nyi) Bresnham line and circle (arc) as coroutines
@@ -51,6 +53,7 @@ Changes:
 	allow 'coroutine' library starting with 'robot' privilege 
 - 0.5.2
     ignite command implemented, small bugs removed: tested TNT stripminer
+	tnt_stripminer.lua
 
 Bug fixes: 
 - 0.5.1 get rid of stupid error message when coroutine ends
