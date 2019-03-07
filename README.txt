@@ -35,6 +35,7 @@ ADDONS 0.5:
   protected target)
 - tnt_stripminer.lua script how to: https://www.youtube.com/watch?v=rncyaO1plew
 	(german, but easy to understand without language)
+- new command "drop"
 - (nyi) more digging costs but just "stone" (not yet implemented)
 - (nyi) turtle routine that draws "turtle-strings", using building material
 - (nyi) Bresnham line and circle (arc) as coroutines
@@ -54,6 +55,9 @@ Changes:
 - 0.5.2
     ignite command implemented, small bugs removed: tested TNT stripminer
 	tnt_stripminer.lua
+	implemented "drop" command which can drop items from it's own inventory,
+	now the tnt_stripminer will get rid of all "default:cobble 99" if called a
+	second time after ending (updated)
 
 Bug fixes: 
 - 0.5.1 get rid of stupid error message when coroutine ends

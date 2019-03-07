@@ -17,6 +17,22 @@ safety=3
 tntloads=10
 ---------------------------------
 
+-- unload
+-- if the mining is done, call the bot again
+-- and it will unload all the cobblestone
+-- then end itself
+local function unload(str)
+	local m
+	for i=1,32 do
+		m=check_inventory.self(str, "main")
+		if m and m~="" then 
+			drop.forward(str)
+		else
+			break
+		end
+	end
+end
+
 local function cost(buy)
     debit=debit-buy
     if debit <=0 then
@@ -96,7 +112,8 @@ for i=1,4 do
 	end
 end
 if n=="air" then 
-	say("No walls to dig")
+	say("No walls to dig unloading...")
+	unload("default:cobblestone 99")
 	self.remove()
 end
 -- gain safety distance

@@ -25,7 +25,7 @@ basic_robot.bad_inventory_blocks = { -- disallow taking from these nodes invento
 
 basic_robot.http_api = minetest.request_http_api(); 
 
-basic_robot.version = "2019/05/03 V0.5.1";
+basic_robot.version = "2019/07/03 V0.5.2";
 
 basic_robot.gui = {}; local robogui = basic_robot.gui -- gui management
 basic_robot.data = {}; -- stores all robot related data
@@ -443,6 +443,11 @@ function getSandboxEnv (name)
 	env.place = {};
 	for dir, dir_id in pairs(directions) do
 		env.place[dir] = function(nodename, param2) return commands.place(name,nodename, param2, dir_id) end
+	end
+	
+	env.drop = {};
+	for dir, dir_id in pairs(directions) do
+		env.drop[dir] = function(nodename, param2) return commands.drop(name,nodename, param2, dir_id) end
 	end
 	
 	env.insert = {}; -- insert item from robot inventory into another inventory

@@ -404,6 +404,25 @@ basic_robot.commands.place = function(name,nodename, param2,dir)
 	return true
 end
 
+basic_robot.commands.drop = function(name,nodename, param2,dir)
+	
+	local obj = basic_robot.data[name].obj;
+	local pos = pos_in_dir(obj, dir)	
+	local luaent = obj:get_luaentity();
+	if minetest.is_protected(pos,luaent.owner ) then return false end
+	
+	local spos = obj:get_luaentity().spawnpos; 
+	local meta = minetest.get_meta(spos);
+	local inv = meta:get_inventory();
+	if not inv then return false end
+	if not inv:contains_item("main", ItemStack(nodename)) and meta:get_int("admin")~=1 then return false end
+	inv:remove_item("main", ItemStack(nodename))
+	minetest.add_item(pos, nodename)
+	
+	return true
+end
+
+
 basic_robot.commands.attack = function(name, target) -- attack range 4, damage 5
 	
 	local energy = 0;
