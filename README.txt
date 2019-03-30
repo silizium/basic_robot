@@ -61,7 +61,7 @@ Changes:
 	now the tnt_stripminer will get rid of all "default:cobble 99" if called a
 	second time after ending (updated)
     'gline()' function added to get bresenham line coordinates aka for x,y,z
-	in gline({1,1,1}, {10, 5, 2}) do … end will go through all x,y,z on that
+	in gline({x=1,y=1,z=1}, {x=10, y=5, z=2}) do … end will go through all x,y,z on that
 	line
 
 Bug fixes: 
