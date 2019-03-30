@@ -148,40 +148,16 @@ basic_robot.commands.gline = function(pos1, pos2)
 		local sy=dy<0 and -1 or 1
 		local sz=dz<0 and -1 or 1
 		dx,dy,dz=abs(dx),abs(dy),abs(dz)
-		local dx2,dy2,dz2=dx*2,dy*2,dz*2
-		if dx>=dy and dx>=dz then
-			local e1, e2=dy2-dx, dz2-dx
-			repeat
-				yield (x1, y1, z1)
-				if x1==x2 then break end
-				if e1>0 then e1=e1-dx2; y1=y1+sy end
-				if e2>0 then e2=e2-dx2; z1=z1+sz end
-				e1=e1+dy2
-				e2=e2+dz2
-				x1=x1+sx
-			until false
-		elseif dy>=dx and dy>=dz then
-			local e1, e2=dx2-dy, dz2-dy
-			repeat
-				yield (x1, y1, z1)
-				if y1==y2 then break end
-				if e1>0 then e1=e1-dy2; x1=x1+sx end
-				if e2>0 then e2=e2-dy2; z1=z1+sz end
-				e1=e1+dx2
-				e2=e2+dz2
-				y1=y1+sy
-			until false
-		else
-			local e1, e2=dx2-dz, dy2-dz
-			repeat
-				yield (x1, y1, z1)
-				if z1==z2 then break end
-				if e1>0 then e1=e1-dz2; x1=x1+sx end
-				if e2>0 then e2=e2-dz2; y1=y1+sy end
-				e1=e1+dx2
-				e2=e2+dy2
-				z1=z1+sz
-			until false
+		local dm=math.max(dx,dy,dz)
+		local ex=dm/2
+		local ey,ez=ex,ex
+		for i=dm,0,-1 do
+			yield (x1, y1, z1)
+			if i<=0 then break end
+			ex=ex-dx if ex<0 then ex=ex+dm; x1=x1+sx end
+			ey=ey-dy if ey<0 then ey=ey+dm; y1=y1+sy end
+			ez=ez-dz if ez<0 then ez=ez+dm; z1=z1+sz end
+			i=i-1
 		end
 	end)
 end
