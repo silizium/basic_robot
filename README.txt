@@ -60,6 +60,9 @@ Changes:
 	implemented "drop" command which can drop items from it's own inventory,
 	now the tnt_stripminer will get rid of all "default:cobble 99" if called a
 	second time after ending (updated)
+    'gline()' function added to get bresenham line coordinates aka for x,y,z
+	in gline({1,1,1}, {10, 5, 2}) do … end will go through all x,y,z on that
+	line
 
 Bug fixes: 
 - 0.5.1 get rid of stupid error message when coroutine ends
