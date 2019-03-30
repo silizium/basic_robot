@@ -134,16 +134,12 @@ basic_robot.commands.gline = function(pos1, pos2)
 	local yield, abs=coroutine.yield, math.abs
 	return coroutine.wrap(
 	function()
-		local x1 = math.floor(pos1.x+.5)
-		local y1 = math.floor(pos1.y+.5)
-		local z1 = math.floor(pos1.z+.5)
-		local x2 = math.floor(pos2.x+.5)
-		local y2 = math.floor(pos2.y+.5)
-		local z2 = math.floor(pos2.z+.5)
-
-		local dx = x2-x1
-		local dy = y2-y1
-		local dz = z2-z1
+		local x = math.floor(pos1.x+.5)
+		local y = math.floor(pos1.y+.5)
+		local z = math.floor(pos1.z+.5)
+		local dx = math.floor(pos2.x+.5)-x1
+		local dy = math.floor(pos2.y+.5)-y1
+		local dz = math.floor(pos2.z+.5)-z1
 		local sx=dx<0 and -1 or 1
 		local sy=dy<0 and -1 or 1
 		local sz=dz<0 and -1 or 1
@@ -152,11 +148,11 @@ basic_robot.commands.gline = function(pos1, pos2)
 		local ex=dm/2
 		local ey,ez=ex,ex
 		for i=dm,0,-1 do
-			yield (x1, y1, z1)
+			yield (x, y, z)
 			if i<=0 then break end
-			ex=ex-dx if ex<0 then ex=ex+dm; x1=x1+sx end
-			ey=ey-dy if ey<0 then ey=ey+dm; y1=y1+sy end
-			ez=ez-dz if ez<0 then ez=ez+dm; z1=z1+sz end
+			ex=ex-dx if ex<0 then ex=ex+dm; x=x+sx end
+			ey=ey-dy if ey<0 then ey=ey+dm; y=y+sy end
+			ez=ez-dz if ez<0 then ez=ez+dm; z=z+sz end
 			i=i-1
 		end
 	end)
