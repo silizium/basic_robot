@@ -27,23 +27,24 @@ ADDONS 0.5:
   rise to 3 or 4 in future releases
 - drop ban on "repeat, until, .." because that has no value but harming Lua as
   a language. You can do loops with goto and recursive function calls you can
-  add strings togehter with other means. ".." isn't nice, but it's still not a
+  add strings together by other means. ".." isn't nice, but it's still not a
   problem. And I really like repeat..until. The alternative is goto.
-- lift ban on "coroutine" for everyone, they are no harm but strength of Lua,
+- lift ban on "coroutine", they are no harm but strength of Lua,
   I chose to put it under the "robot" privilege and up.
 - ignite command to enable TNT strip mining (needs priv robot & tnt & not
   protected target)
 - tnt_stripminer.lua script how to: https://www.youtube.com/watch?v=rncyaO1plew
-	(german, but easy to understand without language)
+	(in German (for my pupils), but easy to understand without language)
 - new command "drop"
 - (nyi) more digging costs but just "stone" (not yet implemented)
 - (nyi) turtle routine that draws "turtle-strings", using building material
-- (nyi) Bresnham line and circle (arc) as coroutines
-- (nyi) fill 
-- (nyi) path finding
+- (nyi) Bresnham line and circle (arc) as default coroutines
 - (nyi) repairing of library read
 - (nyi) repairing of colors in display_text
-- (nyi) better graphics for robot (the bot spoils the environment atm)
+- (nyi) better graphics for robot (the bot spoils the environment with its
+  looks atm)
+- (nyi) fill 
+- (nyi) path finding
 
 Changes:
 - 0.5.0 New versioning number starting with 0.5.0 aka get_version() gives
@@ -53,7 +54,8 @@ Changes:
 	"fly" privilege implemented, 
 	allow 'coroutine' library starting with 'robot' privilege 
 - 0.5.2
-    ignite command implemented, small bugs removed: tested TNT stripminer
+    'ignite' command implemented, small bugs removed: tested TNT stripminer
+	'drop' command implemented
 	tnt_stripminer.lua
 	implemented "drop" command which can drop items from it's own inventory,
 	now the tnt_stripminer will get rid of all "default:cobble 99" if called a

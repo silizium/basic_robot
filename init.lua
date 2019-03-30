@@ -81,6 +81,8 @@ function getSandboxEnv (name)
 			right = function() commands.turn(name,-math.pi/2) end,
 			angle = function(angle) commands.turn(name,angle*math.pi/180) end,
 		},
+
+		gline = function(pos1, pos2) return commands.gline(pos1, pos2) end,
 		
 		pickup = function(r) -- pick up items around robot
 			return commands.pickup(r, name);

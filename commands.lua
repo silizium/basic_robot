@@ -130,6 +130,62 @@ basic_robot.commands.turn = function (name, angle)
 	obj:setyaw(yaw);
 end
 
+basic_robot.commands.gline = function(pos1, pos2)
+	local yield, abs=coroutine.yield, math.abs
+	return coroutine.wrap(
+	function()
+		local x1 = math.floor(pos1.x+.5)
+		local y1 = math.floor(pos1.y+.5)
+		local z1 = math.floor(pos1.z+.5)
+		local x2 = math.floor(pos2.x+.5)
+		local y2 = math.floor(pos2.y+.5)
+		local z2 = math.floor(pos2.z+.5)
+
+		local dx = x2-x1
+		local dy = y2-y1
+		local dz = z2-z1
+		local sx=dx<0 and -1 or 1
+		local sy=dy<0 and -1 or 1
+		local sz=dz<0 and -1 or 1
+		dx,dy,dz=abs(dx),abs(dy),abs(dz)
+		local dx2,dy2,dz2=dx*2,dy*2,dz*2
+		if dx>=dy and dx>=dz then
+			local e1, e2=dy2-dx, dz2-dx
+			repeat
+				yield (x1, y1, z1)
+				if x1==x2 then break end
+				if e1>0 then e1=e1-dx2; y1=y1+sy end
+				if e2>0 then e2=e2-dx2; z1=z1+sz end
+				e1=e1+dy2
+				e2=e2+dz2
+				x1=x1+sx
+			until false
+		elseif dy>=dx and dy>=dz then
+			local e1, e2=dx2-dy, dz2-dy
+			repeat
+				yield (x1, y1, z1)
+				if y1==y2 then break end
+				if e1>0 then e1=e1-dy2; x1=x1+sx end
+				if e2>0 then e2=e2-dy2; z1=z1+sz end
+				e1=e1+dx2
+				e2=e2+dz2
+				y1=y1+sy
+			until false
+		else
+			local e1, e2=dx2-dz, dy2-dz
+			repeat
+				yield (x1, y1, z1)
+				if z1==z2 then break end
+				if e1>0 then e1=e1-dz2; x1=x1+sx end
+				if e2>0 then e2=e2-dz2; y1=y1+sy end
+				e1=e1+dx2
+				e2=e2+dy2
+				z1=z1+sz
+			until false
+		end
+	end)
+end
+
 
 basic_robot.digcosts = { -- 1 energy = 1 coal
 	["default:stone"] = 1/25,

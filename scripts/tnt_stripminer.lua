@@ -127,7 +127,7 @@ end
 local boredepth=safety
 for hole=1,tntloads do
 	--borehole
-	for i=1,6 do
+	for i=1,7 do
 		local pos1=self.pos()
 		if read_node.forward() == "air" then
 			cost(2) fly.forward()
@@ -149,7 +149,7 @@ for hole=1,tntloads do
 		end
    end
    --place TNT
-   for i=1,3 do cost(2) fly.backward() end
+   for i=1,4 do cost(2) fly.backward() end
    if is_ore(3) then
 	   if not place.backward("tnt:tnt") then goto exit end
 	   say("Hole "..hole..": placing TNT and igniting...")
@@ -157,7 +157,7 @@ for hole=1,tntloads do
    else
 	   say("Hole "..hole..": no ore in vicinity, no TNT")
    end
-   for i=1,3 do cost(2) fly.forward() end
+   for i=1,4 do cost(2) fly.forward() end
    for i=1,4 do pause() end
    cost(4) pickup(8)
 end
