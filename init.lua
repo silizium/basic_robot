@@ -83,6 +83,7 @@ function getSandboxEnv (name)
 		},
 
 		gline = function(pos1, pos2) return commands.gline(pos1, pos2) end,
+		gbezier = function(pos1, pos2, pos3) return commands.gbezier(pos1, pos2, pos3) end,
 		
 		pickup = function(r) -- pick up items around robot
 			return commands.pickup(r, name);

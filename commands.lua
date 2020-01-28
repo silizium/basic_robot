@@ -131,15 +131,11 @@ basic_robot.commands.turn = function (name, angle)
 end
 
 basic_robot.commands.gline = function(pos1, pos2)
-	local yield, abs=coroutine.yield, math.abs
+	local yield, abs, floor=coroutine.yield, math.abs, math.floor
 	return coroutine.wrap(
 	function()
-		local x = math.floor(pos1.x+.5)
-		local y = math.floor(pos1.y+.5)
-		local z = math.floor(pos1.z+.5)
-		local dx = math.floor(pos2.x+.5)-x
-		local dy = math.floor(pos2.y+.5)-y
-		local dz = math.floor(pos2.z+.5)-z
+		local x,y,z = floor(pos1.x+.5), floor(pos1.y+.5), floor(pos1.z+.5)
+		local dx,dy,dz = floor(pos2.x+.5)-x, floor(pos2.y+.5)-y, floor(pos2.z+.5)-z
 		local sx=dx<0 and -1 or 1
 		local sy=dy<0 and -1 or 1
 		local sz=dz<0 and -1 or 1
@@ -158,6 +154,38 @@ basic_robot.commands.gline = function(pos1, pos2)
 	end)
 end
 
+basic_robot.commands.gbezier = function(pos1, pos2, pos3)
+	local yield, abs, floor=coroutine.yield, math.abs, math.floor
+	return coroutine.wrap(
+	function()
+		local function len2(x,y,z) return x^2+y^2+z^2 end
+		local x,y,z = floor(pos1.x+.5), floor(pos1.y+.5), floor(pos1.z+.5)
+		local d1x,d1y,d1z = floor(pos2.x+.5)-x, floor(pos2.y+.5)-y, floor(pos2.z+.5)-z
+		local d2x,d2y,d2z = floor(pos3.x+.5)-floor(pos2.x+.5), floor(pos3.y+.5)-floor(pos2.y+.5), floor(pos3.z+.5)-floor(pos2.z+.5)
+		local s1x=d1x<0 and -1 or 1
+		local s1y=d1y<0 and -1 or 1
+		local s1z=d1z<0 and -1 or 1
+		local s2x=d2x<0 and -1 or 1
+		local s2y=d2y<0 and -1 or 1
+		local s2z=d2z<0 and -1 or 1
+		local dm=math.sqrt(math.max(len2(d1x,d1y,d1z), len2(d2x,d2y,d2z), len2(floor(pos3.x+.5)-x, floor(pos3.y+.5)-y, floor(pos3.z+.5)-z)))
+		d1x,d1y,d1z,d2x,d2y,d2z=abs(d1x),abs(d1y),abs(d1z),abs(d2x),abs(d2y),abs(d2z)
+		local e1x=dm/2
+		local e1y,e1z,e2x,e2y,e2z=e1x,e1x,e1x,e1x,e1x
+		local invdm=2/(dm>0 and dm or 1)
+		for i=dm,0,-1 do
+			yield(x, y, z)
+			if i<=0 then break end
+			e1x=e1x-d1x if e1x<0 then e1x=e1x+dm; x=x+s1x*i*invdm end
+			e1y=e1y-d1y if e1y<0 then e1y=e1y+dm; y=y+s1y*i*invdm end
+			e1z=e1z-d1z if e1z<0 then e1z=e1z+dm; z=z+s1z*i*invdm end
+			e2x=e2x-d2x if e2x<0 then e2x=e2x+dm; x=x+s2x*(dm-i)*invdm end
+			e2y=e2y-d2y if e2y<0 then e2y=e2y+dm; y=y+s2y*(dm-i)*invdm end
+			e2z=e2z-d2z if e2z<0 then e2z=e2z+dm; z=z+s2z*(dm-i)*invdm end
+			i=i-1
+		end
+	end)
+end
 
 basic_robot.digcosts = { -- 1 energy = 1 coal
 	["default:stone"] = 1/25,
